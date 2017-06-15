@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
-  sudo: yes
 
   vars:
     http_port: 8081
