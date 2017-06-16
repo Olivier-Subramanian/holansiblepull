@@ -27,10 +27,13 @@
       notify:
         - restart apache2
 
-    - name: create virtual host file
+    - name: get template virtual host file
       get_url:
         url: https://raw.githubusercontent.com/ianalderman/holansiblepull/master/virtualhost.conf
-        dest: /etc/apache2/sites-available/{{ domain }}.conf
+        dest: ~
+
+    - name: create virtual host file
+      template: src=~/virtualhost.conf dest=/etc/apache2/sites-available/{{ domain }}.conf
 
     - name: a2ensite {{ domain }}
       command: a2ensite {{ domain }}
