@@ -45,6 +45,11 @@
     - name: clone basic html template
       git: repo=https://github.com/ianalderman/helloworldhtml.git dest=/var/www/html update=no
 
+    - name: clear default site
+      command: mv /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf.old
+      notify:
+        - restart apache2
+        
   handlers:
     - name: restart apache2
       service: name=apache2 state=restarted
